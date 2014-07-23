@@ -29,6 +29,12 @@
 # Merging of previous sysctl.conf settings if new settings don't override
 # tcp_available_congestion_control detection and setting
 # Updates hosted on github at https://github.com/jonzobrist/Bash-Admin-Scripts
+# July 2014 Patrik Uytterhoeven <patrik@open-future.be>
+# Added:
+# vm.dirty tweaks for ssd, high memory, high io load
+# tcp tweaks altered
+# added some extra parameters
+# start script now with ssd or vm to tune for ssd or vm
 
 host=$(hostname)
 
