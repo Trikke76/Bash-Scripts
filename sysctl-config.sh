@@ -29,11 +29,12 @@
 # Merging of previous sysctl.conf settings if new settings don't override
 # tcp_available_congestion_control detection and setting
 # Updates hosted on github at https://github.com/jonzobrist/Bash-Admin-Scripts
-# July 2014 Patrik Uytterhoeven <patrik@open-future.be>
+# Nov 2015 Patrik Uytterhoeven <patrik@open-future.be>
 # Added:
 # vm.dirty tweaks for ssd, high memory, high io load
 # tcp tweaks altered
-# added some extra parameters
+# added some extra parameters 
+# Network tuning improved with extra parameters for udp
 # start script now with ssd or vm to tune for ssd or vm
 
 host=$(hostname)
@@ -164,7 +165,7 @@ net.ipv4.tcp_orphan_retries = 1
 
 # how long to keep sockets in the state FIN-WAIT-2
 # if we were the one closing the socket
-net.ipv4.tcp_fin_timeout = 20
+net.ipv4.tcp_fin_timeout = 10
 
 # maximum number of sockets in TIME-WAIT to be held simultaneously
 net.ipv4.tcp_max_tw_buckets = $max_tw
@@ -174,8 +175,9 @@ net.ipv4.tcp_no_metrics_save = 1
 net.ipv4.tcp_moderate_rcvbuf = 1
 
 # increase Linux autotuning TCP buffer limits
-net.ipv4.tcp_rmem = 4096 87380 19430 
-net.ipv4.tcp_wmem = 32768 436600 873200	
+net.ipv4.tcp_rmem=4096 87380 16777216
+net.ipv4.tcp_wmem=4096 16384 16777216
+net.ipv4.udp_mem=3145728 4194304 16777216
 
 # increase TCP max buffer size
 net.core.rmem_max = 131071
@@ -184,7 +186,7 @@ net.core.wmem_max = 131071
 net.core.netdev_max_backlog = 30000
 net.core.somaxconn = 1536
 
-vm.swappiness = 0
+vm.swappiness = 10
 
 # You can monitor the kernel behavior with regard to the dirty
 # pages by using grep -A 1 dirty /proc/vmstat
