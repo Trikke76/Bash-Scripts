@@ -174,9 +174,9 @@ net.ipv4.tcp_max_tw_buckets = $max_tw
 net.ipv4.tcp_no_metrics_save = 1
 net.ipv4.tcp_moderate_rcvbuf = 1
 
-# increase Linux autotuning TCP buffer limits
+# increase Linux autotuning TCP buffer limits use set max to 16MB for 1GE, and 32M or 54M for 10GE:
 net.ipv4.tcp_rmem=4096 87380 16777216
-net.ipv4.tcp_wmem=4096 16384 16777216
+net.ipv4.tcp_wmem=4096 65536 33554432
 net.ipv4.udp_mem=3145728 4194304 16777216
 
 # increase TCP max buffer size
